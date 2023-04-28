@@ -8,10 +8,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: craftech-io/slack-action@v1
+      - uses: 8398a7/action-slack@v3
         with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+        env:
           slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
           slack_username: Github
-          status: failure
         if: always()
 
